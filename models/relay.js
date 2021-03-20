@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const RelaySchema = new mongoose.Schema({
-  DeviceID: {
-    type: String,
-    required: true
-  },
+  
   R1: {
     type: String,
     
