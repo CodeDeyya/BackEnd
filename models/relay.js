@@ -42,7 +42,22 @@ const RelaySchema = new mongoose.Schema({
     type: String,
     
   },
-
+  R11: {
+    type: String,
+    
+  },
+  DeviceName:{
+    type: String,
+  },
+  Email:{
+    type: String,
+  },
+  Password:{
+    type: String,
+  },
+  Status:{
+    type: Number,
+  },
   updated_date: {
   type: Date,
   default: Date.now
