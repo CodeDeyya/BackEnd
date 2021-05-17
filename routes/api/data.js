@@ -123,16 +123,22 @@ router.get('/:id', (req, res) => {
 // @access Public
 router.post('/', (req, res) => {
   log.create(req.body)
-  .then(data => res.json({ msg: 'Updated successfully' }))
+  .then((data) => {
+    
+    res.json({ msg: 'Updated successfully' })
+  
+    data.findOneAndUpdate(req.body.DeviceID, req.body)
+    .then(data => res.json({ msg: 'Updated successfully' }))
+    .catch(err =>
+      res.status(400).json({ error: 'Unable to update the Database' })
+    );
+  
+  })
   .catch(err =>
     res.status(400).json({ error: 'Unable to update the Database' })
   );
   
-  data.findOneAndUpdate(req.body.DeviceID, req.body)
-  .then(data => res.json({ msg: 'Updated successfully' }))
-  .catch(err =>
-    res.status(400).json({ error: 'Unable to update the Database' })
-  );
+  
 });
 
 // @route GET api/books/:id
