@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 // Load data model
-const data = require('../../models/data');
-const log = require('../../models/log');
-const Relay = require('../../models/Relay');
+const data = require('../../models/data.js');
+const log = require('../../models/log.js');
+const Relay = require('../../models/relay.js');
 // @route GET api/books/test
 // @description tests books route
 // @access Public

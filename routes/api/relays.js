@@ -4,10 +4,10 @@ const express = require('express');
 const router = express.Router();
 
 // Load Book model
-const Relay = require('../../models/Relay');
-const Data = require('../../models/data');
-const log = require('../../models/log');
-const logger = require('../../models/logger');
+const Relay = require('../../models/relay.js');
+const Data = require('../../models/data.js');
+const log = require('../../models/log.js');
+const logger = require('../../models/logger.js');
 
 var setDays = 0
 var Days = 0
