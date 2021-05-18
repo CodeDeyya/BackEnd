@@ -99,7 +99,7 @@ log.aggregate([
          }  
     
     ],function(err,  apartments) {
-      if (err) res.send(err);
+     
       apartments.forEach(function(object){
         if(object._id.Status ===0){
           Days = object.Count
@@ -190,7 +190,7 @@ if(Status === 1){
            }  
       
       ],function(err,  apartments) {
-        if (err) res.send(err);
+        
         apartments.forEach(function(object){
           
           if(object._id.Status ===1){
@@ -282,7 +282,7 @@ if(Status === 1){
              }  
         
         ],function(err,  apartments) {
-          if (err) res.send(err);
+          
           apartments.forEach(function(object){
             if(object._id.Status ===2){
               Days = object.Count
@@ -369,7 +369,7 @@ if(Status === 1){
                }  
           
           ],function(err,  apartments) {
-            if (err) res.send(err);
+            
             apartments.forEach(function(object){
               if(object._id.Status ===3){
                 Days = object.Count
@@ -457,7 +457,7 @@ if(Status === 1){
                  }  
             
             ],function(err,  apartments) {
-              if (err) res.send(err);
+              
               apartments.forEach(function(object){
                 if(object._id.Status ===4){
                   Days = object.Count
@@ -545,7 +545,7 @@ if(Status === 1){
                    }  
               
               ],function(err,  apartments) {
-                if (err) res.send(err);
+               
                 apartments.forEach(function(object){
                   if(object._id.Status ===5){
                     Days = object.Count
@@ -633,7 +633,7 @@ if(Status === 1){
                      }  
                 
                 ],function(err,  apartments) {
-                  if (err) res.send(err);
+                  
                   apartments.forEach(function(object){
                     if(object._id.Status ===6){
                       Days = object.Count
