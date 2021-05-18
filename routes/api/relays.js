@@ -55,7 +55,7 @@ router.get('/:id', (req, res) => {
                     Flush = book.Flush
 
 
-console.log(EarlyVeg);
+
 
 if(Status === 0){
 
@@ -109,7 +109,7 @@ log.aggregate([
             .then((book) => {
                               res.json(book)
                             })
-            .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+           
 
           }else{
             var message = JSON.parse(`{"Status": 1}`);
@@ -121,21 +121,17 @@ log.aggregate([
                   .then((book) => {
                                     res.json(book)
                                   })
-                  .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+               
               
               })
-                  .catch(err =>
-                  res.status(400).json({ error: 'Unable to update the Database' })
-              );   
+                  
 
 
 
 
                 
               })
-               .catch(err =>
-                res.status(400).json({ error: 'Unable to update the Database' })
-            );
+               
             
    
 
@@ -146,14 +142,14 @@ log.aggregate([
             .then((book) => {
                               res.json(book)
                             })
-            .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+           
         }
       })
   });
 }
 
 if(Status === 1){
-  console.log("im in")
+  
   setDays = EarlyVeg  
   log.aggregate([
       {
@@ -207,7 +203,7 @@ if(Status === 1){
               .then((book) => {
                                 res.json(book)
                               })
-              .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+              
   
             }else{
               var message = JSON.parse(`{"Status": 2}`);
@@ -219,21 +215,17 @@ if(Status === 1){
                   .then((book) => {
                                     res.json(book)
                                   })
-                  .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+               
               
               })
-                  .catch(err =>
-                  res.status(400).json({ error: 'Unable to update the Database' })
-              );   
+                   
 
 
 
 
                 
               })
-               .catch(err =>
-                res.status(400).json({ error: 'Unable to update the Database' })
-            );
+               
             
             }
           }else {
@@ -241,7 +233,7 @@ if(Status === 1){
               .then((book) => {
                                 res.json(book)
                               })
-              .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+              
           }
         })
     });
@@ -300,7 +292,7 @@ if(Status === 1){
                 .then((book) => {
                                   res.json(book)
                                 })
-                .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+              
     
               }else{
                 var message = JSON.parse(`{"Status": 3}`);
@@ -312,21 +304,16 @@ if(Status === 1){
                   .then((book) => {
                                     res.json(book)
                                   })
-                  .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                  
               
               })
-                  .catch(err =>
-                  res.status(400).json({ error: 'Unable to update the Database' })
-              );   
 
 
 
 
                 
               })
-               .catch(err =>
-                res.status(400).json({ error: 'Unable to update the Database' })
-            );
+               
             
               }
             }else {
@@ -334,7 +321,7 @@ if(Status === 1){
                 .then((book) => {
                                   res.json(book)
                                 })
-                .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+               
             }
           })
       });
@@ -392,7 +379,7 @@ if(Status === 1){
                   .then((book) => {
                                     res.json(book)
                                   })
-                  .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                  
       
                 }else{
                   var message = JSON.parse(`{"Status": 4}`);
@@ -404,21 +391,17 @@ if(Status === 1){
                   .then((book) => {
                                     res.json(book)
                                   })
-                  .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                  
               
               })
-                  .catch(err =>
-                  res.status(400).json({ error: 'Unable to update the Database' })
-              );   
+                 
 
 
 
 
                 
               })
-               .catch(err =>
-                res.status(400).json({ error: 'Unable to update the Database' })
-            );
+               
             
                 }
               }else {
@@ -426,7 +409,7 @@ if(Status === 1){
                   .then((book) => {
                                     res.json(book)
                                   })
-                  .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                  
               }
             })
         });
@@ -484,7 +467,7 @@ if(Status === 1){
                     .then((book) => {
                                       res.json(book)
                                     })
-                    .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                    ;
         
                   }else{
                     var message = JSON.parse(`{"Status": 5}`);
@@ -496,21 +479,17 @@ if(Status === 1){
                   .then((book) => {
                                     res.json(book)
                                   })
-                  .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+               
               
               })
-                  .catch(err =>
-                  res.status(400).json({ error: 'Unable to update the Database' })
-              );   
+                     
 
 
 
 
                 
               })
-               .catch(err =>
-                res.status(400).json({ error: 'Unable to update the Database' })
-            );
+               
             
                   }
                 }else {
@@ -518,7 +497,7 @@ if(Status === 1){
                     .then((book) => {
                                       res.json(book)
                                     })
-                    .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                   
                 }
               })
           });
@@ -576,7 +555,7 @@ if(Status === 1){
                       .then((book) => {
                                         res.json(book)
                                       })
-                      .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                      
           
                     }else{
                       var message = JSON.parse(`{"Status": 6}`);
@@ -588,21 +567,17 @@ if(Status === 1){
                           .then((book) => {
                                             res.json(book)
                                           })
-                          .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                         
                       
                       })
-                          .catch(err =>
-                          res.status(400).json({ error: 'Unable to update the Database' })
-                      );   
+                            
         
         
         
         
                         
                       })
-                       .catch(err =>
-                        res.status(400).json({ error: 'Unable to update the Database' })
-                    );
+                       
                     
                     }
                   }else {
@@ -610,7 +585,7 @@ if(Status === 1){
                       .then((book) => {
                                         res.json(book)
                                       })
-                      .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                    
                   }
                 })
             });
@@ -668,7 +643,7 @@ if(Status === 1){
                         .then((book) => {
                                           res.json(book)
                                         })
-                        .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                        
             
                       }else{
                         var message = JSON.parse(`{"Status": 6}`);
@@ -680,21 +655,17 @@ if(Status === 1){
                   .then((book) => {
                                     res.json(book)
                                   })
-                  .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                 
               
               })
-                  .catch(err =>
-                  res.status(400).json({ error: 'Unable to update the Database' })
-              );   
+                  
 
 
 
 
                 
               })
-               .catch(err =>
-                res.status(400).json({ error: 'Unable to update the Database' })
-            );
+               
             
 
                       }
@@ -703,7 +674,7 @@ if(Status === 1){
                         .then((book) => {
                                           res.json(book)
                                         })
-                        .catch(err => res.status(404).json({ norelayfound: 'No Relay found' }));
+                        
                     }
                   })
               });
@@ -712,7 +683,7 @@ if(Status === 1){
 
 
 })
-  .catch(err => res.status(404).json({ ID: 'Not Found' }));                    
+                     
 
 
 
@@ -725,7 +696,7 @@ if(Status === 1){
 
 
 })
-    .catch(err => res.status(404).json({ nobookfound: 'No data found' }));
+    
   
 
  

@@ -58,6 +58,9 @@ const RelaySchema = new mongoose.Schema({
   Status:{
     type: Number,
   },
+  WC:{
+  type: Number
+  },
   updated_date: {
   type: Date,
   default: Date.now

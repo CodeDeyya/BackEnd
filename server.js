@@ -8,6 +8,7 @@ const relays = require('./routes/api/relays.js');
 const userverification = require ('./routes/api/userverification.js')
 const data = require('./routes/api/data.js')
 const logger = require('./routes/api/logger.js')
+const waterchange = require('./routes/api/waterchange.js')
 const app = express();
 
 // Connect Database
@@ -27,6 +28,7 @@ app.use('/api/relays', relays);
 app.use('/api/userverification',userverification);
 app.use('/api/data', data);
 app.use('/api/logger', logger);
+app.use('/api/waterchange', waterchange)
 
 const port = process.env.PORT || 8082;
 
