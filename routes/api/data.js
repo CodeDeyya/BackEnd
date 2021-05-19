@@ -122,13 +122,16 @@ router.get('/:id', (req, res) => {
 // @description add/save data
 // @access Public
 router.post('/', (req, res) => {
-  log.create(req.body)
-  .then((data) => {
-    
-    res.json({ msg: 'Updated successfully' })
   
+  log.create(req.body)
+  .then((dataq) => {
+    
+    
+    
     data.findOneAndUpdate(req.body.DeviceID, req.body)
-    .then(data => res.json({ msg: 'Updated successfully' }))
+    .then((data) => {
+      console.log("all okay")
+      res.json({ msg: 'Updated successfully' })})
     .catch(err =>
       res.status(400).json({ error: 'Unable to update the Database' })
     );
