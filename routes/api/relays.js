@@ -42,6 +42,8 @@ router.get('/:id', (req, res) => {
  
   Data.findById(req.params.id)
     .then((data) => {
+
+  console.log(data.Status);
   Status = data.Status
 
   logger.findById(req.params.id)
