@@ -125,22 +125,12 @@ router.post('/', (req, res) => {
   
   log.create(req.body)
   .then((dataq) => {
-    
-    
-    
     data.findOneAndUpdate(req.body.DeviceID, req.body)
     .then((data) => {
       console.log("all okay")
-      res.json({ msg: 'Updated successfully' })})
-    .catch(err =>
-      res.status(400).json({ error: 'Unable to update the Database' })
-    );
+      res.json({ msg: 'FUCK successfully' })})
   
   })
-  .catch((err) =>{
-
-  }
-  );
   
   
 });
