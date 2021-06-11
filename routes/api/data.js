@@ -141,16 +141,14 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   console.log(req.body);
   data.findByIdAndUpdate(req.params.id, req.body)
-    .then((data) => {res.json({ msg: 'Updated successfully' })
+    .then((data) => {
     Relay.findByIdAndUpdate(req.params.id, req.body)
     .then(data => res.json({ msg: 'Updated successfully' }))
     .catch(err =>
       res.status(400).json({ error: 'Unable to update the Database' })
     );    
   })
-    .catch((err) =>{}
-      
-    );
+    
    
 
 });
