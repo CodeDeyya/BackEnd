@@ -61,11 +61,7 @@ router.get('/:id', (req, res) => {
                     Flower = book.Flower
                     Flush = book.Flush
 
-
-
-
 if(Status === 0){
-
 setDays = Germination  
 log.aggregate([
     {
@@ -104,32 +100,32 @@ log.aggregate([
           $sort: { _id: 1}
 
          }  
-
-    ],function(err,  apartments) {
+],function(err,  apartments) {
         apartments.forEach(function(object){
         console.log(object)
-        if(object._id.Status ===0){
+        if(object._id.Status === 0){
           Days = object.Count
-          if (Days<setDays){
-          Relay.findById(req.params.id)
-            .then((book) => {
-              res.json(book)
-                            })
-           }else{
-            var message = JSON.parse(`{"Status": 1}`);
-            Data.findByIdAndUpdate(req.params.id, message)
-              .then((data) => { 
-                Relay.findByIdAndUpdate(req.params.id, message)
-                .then((data) => {
-                  Relay.findById(req.params.id)
-                  .then((book) => {
-                                    res.json(book)
-                                  })
-              })
-              })
-          }
         }
       })
+
+      if (Days<setDays){
+        Relay.findById(req.params.id)
+          .then((book) => {
+            res.json(book)
+                          })
+         }else{
+          var message = JSON.parse(`{"Status": 1}`);
+          Data.findByIdAndUpdate(req.params.id, message)
+            .then((data) => { 
+              Relay.findByIdAndUpdate(req.params.id, message)
+              .then((data) => {
+                Relay.findById(req.params.id)
+                .then((book) => {
+                                  res.json(book)
+                                })
+            })
+            })
+        }
   });
 }
 
@@ -166,30 +162,28 @@ if(Status === 1){
                   Day: "$_id.day"},
               Count: {$sum: 1}
                 }
-
+  
            },
            {
             $sort: { _id: 1}
-
+  
            }  
-
-      ],function(err,  apartments) {
-        console.log(apartments);
-        apartments.forEach(function(object){
-          
-          if(object._id.Status ===1){
+  ],function(err,  apartments) {
+          apartments.forEach(function(object){
+          console.log(object)
+          if(object._id.Status === 1){
             Days = object.Count
-            console.log(Days);
-            console.log(setDays);
-            if (Days<setDays){
-              console.log("in")
-              Relay.findById(req.params.id)
-              .then((book) => {
-                                
-                              })
-            }else{
-              var message = JSON.parse(`{"Status": 2}`);
-              Data.findByIdAndUpdate(req.params.id, message)
+          }
+        })
+  
+        if (Days<setDays){
+          Relay.findById(req.params.id)
+            .then((book) => {
+              res.json(book)
+                            })
+           }else{
+            var message = JSON.parse(`{"Status": 2}`);
+            Data.findByIdAndUpdate(req.params.id, message)
               .then((data) => { 
                 Relay.findByIdAndUpdate(req.params.id, message)
                 .then((data) => {
@@ -199,17 +193,148 @@ if(Status === 1){
                                   })
               })
               })
-            }
-          }else{
           }
-        })
     });
   }
 
+if(Status === 2){
+setDays = MidVeg  
+log.aggregate([
+    {
+       $project:
+         {
+           year: { $year: "$updated_date" },
+           month: { $month: "$updated_date" },
+           day: { $dayOfMonth: "$updated_date" },
+           _id: "$id",
+           Status: "$Status",
+           Data: "$Status"
+         }
+    },
+    {
+      $group:
+        {
+         "_id":{ Status: "$Status",
+                 Year:"$year",
+                Month: "$month",
+              Day: "$day"},
+          Count: {$sum: 1}
+            }
+       },
+       {
+        $group:
+          {
+           "_id":{ Status: "$_id.Status",
+                   Year:"$_id.year",
+                  Month: "$_id.month",
+                Day: "$_id.day"},
+            Count: {$sum: 1}
+              }
 
-  if(Status === 2){
+         },
+         {
+          $sort: { _id: 1}
 
-    setDays = MidVeg  
+         }  
+],function(err,  apartments) {
+        apartments.forEach(function(object){
+        console.log(object)
+        if(object._id.Status === 2){
+          Days = object.Count
+        }
+      })
+
+      if (Days<setDays){
+        Relay.findById(req.params.id)
+          .then((book) => {
+            res.json(book)
+                          })
+         }else{
+          var message = JSON.parse(`{"Status": 3}`);
+          Data.findByIdAndUpdate(req.params.id, message)
+            .then((data) => { 
+              Relay.findByIdAndUpdate(req.params.id, message)
+              .then((data) => {
+                Relay.findById(req.params.id)
+                .then((book) => {
+                                  res.json(book)
+                                })
+            })
+            })
+        }
+  });
+}
+
+if(Status === 3){
+  setDays = LateVeg  
+  log.aggregate([
+      {
+         $project:
+           {
+             year: { $year: "$updated_date" },
+             month: { $month: "$updated_date" },
+             day: { $dayOfMonth: "$updated_date" },
+             _id: "$id",
+             Status: "$Status",
+             Data: "$Status"
+           }
+      },
+      {
+        $group:
+          {
+           "_id":{ Status: "$Status",
+                   Year:"$year",
+                  Month: "$month",
+                Day: "$day"},
+            Count: {$sum: 1}
+              }
+         },
+         {
+          $group:
+            {
+             "_id":{ Status: "$_id.Status",
+                     Year:"$_id.year",
+                    Month: "$_id.month",
+                  Day: "$_id.day"},
+              Count: {$sum: 1}
+                }
+  
+           },
+           {
+            $sort: { _id: 1}
+  
+           }  
+  ],function(err,  apartments) {
+          apartments.forEach(function(object){
+          console.log(object)
+          if(object._id.Status === 3){
+            Days = object.Count
+          }
+        })
+  
+        if (Days<setDays){
+          Relay.findById(req.params.id)
+            .then((book) => {
+              res.json(book)
+                            })
+           }else{
+            var message = JSON.parse(`{"Status": 4}`);
+            Data.findByIdAndUpdate(req.params.id, message)
+              .then((data) => { 
+                Relay.findByIdAndUpdate(req.params.id, message)
+                .then((data) => {
+                  Relay.findById(req.params.id)
+                  .then((book) => {
+                                    res.json(book)
+                                  })
+              })
+              })
+          }
+    });
+  }
+
+  if(Status === 4){
+    setDays = Transition  
     log.aggregate([
         {
            $project:
@@ -241,62 +366,43 @@ if(Status === 1){
                     Day: "$_id.day"},
                 Count: {$sum: 1}
                   }
-
+    
              },
              {
               $sort: { _id: 1}
-
+    
              }  
-
-        ],function(err,  apartments) {
-
-          apartments.forEach(function(object){
-            if(object._id.Status ===2){
+    ],function(err,  apartments) {
+            apartments.forEach(function(object){
+            console.log(object)
+            if(object._id.Status === 4){
               Days = object.Count
-              if (Days<setDays){
-
-                Relay.findById(req.params.id)
-                .then((book) => {
-                                  res.json(book)
-                                })
-
-
-              }else{
-                var message = JSON.parse(`{"Status": 3}`);
-                Data.findByIdAndUpdate(req.params.id, message)
-              .then((data) => { 
-                Relay.findByIdAndUpdate(req.params.id, message)
-                .then((data) => {
-                  Relay.findById(req.params.id)
-                  .then((book) => {
-                                    res.json(book)
-                                  })
-
-
-              })
-
-
-
-
-
-              })
-
-
-              }
-            }else {
-              Relay.findById(req.params.id)
-                .then((book) => {
-                                  res.json(book)
-                                })
-
             }
           })
+    
+          if (Days<setDays){
+            Relay.findById(req.params.id)
+              .then((book) => {
+                res.json(book)
+                              })
+             }else{
+              var message = JSON.parse(`{"Status": 5}`);
+              Data.findByIdAndUpdate(req.params.id, message)
+                .then((data) => { 
+                  Relay.findByIdAndUpdate(req.params.id, message)
+                  .then((data) => {
+                    Relay.findById(req.params.id)
+                    .then((book) => {
+                                      res.json(book)
+                                    })
+                })
+                })
+            }
       });
     }
 
-    if(Status === 3){
-
-      setDays = LateVeg  
+    if(Status === 5){
+      setDays = Flower  
       log.aggregate([
           {
              $project:
@@ -328,63 +434,42 @@ if(Status === 1){
                       Day: "$_id.day"},
                   Count: {$sum: 1}
                     }
-
+      
                },
                {
                 $sort: { _id: 1}
-
+      
                }  
-
-          ],function(err,  apartments) {
-
-            apartments.forEach(function(object){
-              if(object._id.Status ===3){
+      ],function(err,  apartments) {
+              apartments.forEach(function(object){
+              console.log(object)
+              if(object._id.Status === 5){
                 Days = object.Count
-                if (Days<setDays){
-
-                  Relay.findById(req.params.id)
-                  .then((book) => {
-                                    res.json(book)
-                                  })
-
-
-                }else{
-                  var message = JSON.parse(`{"Status": 4}`);
-                  Data.findByIdAndUpdate(req.params.id, message)
-              .then((data) => { 
-                Relay.findByIdAndUpdate(req.params.id, message)
-                .then((data) => {
-                  Relay.findById(req.params.id)
-                  .then((book) => {
-                                    res.json(book)
-                                  })
-
-
-              })
-
-
-
-
-
-
-              })
-
-
-                }
-              }else {
-                Relay.findById(req.params.id)
-                  .then((book) => {
-                                    res.json(book)
-                                  })
-
               }
             })
+      
+            if (Days<setDays){
+              Relay.findById(req.params.id)
+                .then((book) => {
+                  res.json(book)
+                                })
+               }else{
+                var message = JSON.parse(`{"Status": 6}`);
+                Data.findByIdAndUpdate(req.params.id, message)
+                  .then((data) => { 
+                    Relay.findByIdAndUpdate(req.params.id, message)
+                    .then((data) => {
+                      Relay.findById(req.params.id)
+                      .then((book) => {
+                                        res.json(book)
+                                      })
+                  })
+                  })
+              }
         });
-      }
-
-      if(Status === 4){
-
-        setDays = Transition  
+      } 
+      if(Status === 6){
+        setDays = Flower  
         log.aggregate([
             {
                $project:
@@ -416,239 +501,40 @@ if(Status === 1){
                         Day: "$_id.day"},
                     Count: {$sum: 1}
                       }
-
+        
                  },
                  {
                   $sort: { _id: 1}
-
+        
                  }  
-
-            ],function(err,  apartments) {
-
-              apartments.forEach(function(object){
-                if(object._id.Status ===4){
+        ],function(err,  apartments) {
+                apartments.forEach(function(object){
+                console.log(object)
+                if(object._id.Status === 6){
                   Days = object.Count
-                  if (Days<setDays){
-
-                    Relay.findById(req.params.id)
-                    .then((book) => {
-                                      res.json(book)
-                                    })
-                    ;
-
-                  }else{
-                    var message = JSON.parse(`{"Status": 5}`);
-                    Data.findByIdAndUpdate(req.params.id, message)
-              .then((data) => { 
-                Relay.findByIdAndUpdate(req.params.id, message)
-                .then((data) => {
-                  Relay.findById(req.params.id)
-                  .then((book) => {
-                                    res.json(book)
-                                  })
-
-
-              })
-
-
-
-
-
-
-              })
-
-
-                  }
-                }else {
-                  Relay.findById(req.params.id)
-                    .then((book) => {
-                                      res.json(book)
-                                    })
-
                 }
               })
-          });
-        }
-
-        if(Status === 5){
-
-          setDays = Flower  
-          log.aggregate([
-              {
-                 $project:
-                   {
-                     year: { $year: "$updated_date" },
-                     month: { $month: "$updated_date" },
-                     day: { $dayOfMonth: "$updated_date" },
-                     _id: "$id",
-                     Status: "$Status",
-                     Data: "$Status"
-                   }
-              },
-              {
-                $group:
-                  {
-                   "_id":{ Status: "$Status",
-                           Year:"$year",
-                          Month: "$month",
-                        Day: "$day"},
-                    Count: {$sum: 1}
-                      }
-                 },
-                 {
-                  $group:
-                    {
-                     "_id":{ Status: "$_id.Status",
-                             Year:"$_id.year",
-                            Month: "$_id.month",
-                          Day: "$_id.day"},
-                      Count: {$sum: 1}
-                        }
-
-                   },
-                   {
-                    $sort: { _id: 1}
-
-                   }  
-
-              ],function(err,  apartments) {
-
-                apartments.forEach(function(object){
-                  if(object._id.Status ===5){
-                    Days = object.Count
-                    if (Days<setDays){
-
-                      Relay.findById(req.params.id)
-                      .then((book) => {
-                                        res.json(book)
-                                      })
-
-
-                    }else{
-                      var message = JSON.parse(`{"Status": 6}`);
-                      Data.findByIdAndUpdate(req.params.id, message)
-                      .then((data) => { 
-                        Relay.findByIdAndUpdate(req.params.id, message)
-                        .then((data) => {
-                          Relay.findById(req.params.id)
-                          .then((book) => {
-                                            res.json(book)
-                                          })
-
-
-                      })
-
-
-
-
-
-
-                      })
-
-
-                    }
-                  }else {
-                    Relay.findById(req.params.id)
-                      .then((book) => {
-                                        res.json(book)
-                                      })
-
-                  }
-                })
-            });
-          }
-
-          if(Status === 6){
-
-            setDays = Flush  
-            log.aggregate([
-                {
-                   $project:
-                     {
-                       year: { $year: "$updated_date" },
-                       month: { $month: "$updated_date" },
-                       day: { $dayOfMonth: "$updated_date" },
-                       _id: "$id",
-                       Status: "$Status",
-                       Data: "$Status"
-                     }
-                },
-                {
-                  $group:
-                    {
-                     "_id":{ Status: "$Status",
-                             Year:"$year",
-                            Month: "$month",
-                          Day: "$day"},
-                      Count: {$sum: 1}
-                        }
-                   },
-                   {
-                    $group:
-                      {
-                       "_id":{ Status: "$_id.Status",
-                               Year:"$_id.year",
-                              Month: "$_id.month",
-                            Day: "$_id.day"},
-                        Count: {$sum: 1}
-                          }
-
-                     },
-                     {
-                      $sort: { _id: 1}
-
-                     }  
-
-                ],function(err,  apartments) {
-
-                  apartments.forEach(function(object){
-                    if(object._id.Status ===6){
-                      Days = object.Count
-                      if (Days<setDays){
-
+        
+              if (Days<setDays){
+                Relay.findById(req.params.id)
+                  .then((book) => {
+                    res.json(book)
+                                  })
+                 }else{
+                  var message = JSON.parse(`{"Status": 7}`);
+                  Data.findByIdAndUpdate(req.params.id, message)
+                    .then((data) => { 
+                      Relay.findByIdAndUpdate(req.params.id, message)
+                      .then((data) => {
                         Relay.findById(req.params.id)
                         .then((book) => {
                                           res.json(book)
                                         })
-
-
-                      }else{
-                        var message = JSON.parse(`{"Status": 6}`);
-                        Data.findByIdAndUpdate(req.params.id, message)
-              .then((data) => { 
-                Relay.findByIdAndUpdate(req.params.id, message)
-                .then((data) => {
-                  Relay.findById(req.params.id)
-                  .then((book) => {
-                                    res.json(book)
-                                  })
-
-
-              })
-
-
-
-
-
-
-              })
-
-
-
-                      }
-                    }else {
-                      Relay.findById(req.params.id)
-                        .then((book) => {
-                                          res.json(book)
-                                        })
-
-                    }
-                  })
-              });
-            }
-
-
-
+                    })
+                    })
+                }
+          });
+        } 
 })
 })
 });
