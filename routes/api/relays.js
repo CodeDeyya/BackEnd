@@ -41,9 +41,8 @@ router.get("/:id", (req, res) => {
   Data.findById(req.params.id).then((data) => {
     console.log("Status", data.Status);
     Status = data.Status;
-    var d = new Date(Date.now());
-    d.toString();
-    console.log("Time", d);
+
+    console.log("Time", Date.now());
     // Light.findOne({ DeviceID: "6052e44860ab3d1d88673fb7" })
     //   .then((data) => {
     //     console.log("updatedOn", data);
