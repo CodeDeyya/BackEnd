@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 
-const Light = new mongoose.Schema({
+const LightSchema = new mongoose.Schema({
   DeviceID: {
     type: String,
     required: true,
   },
-  LastChange: {
-    type: Date,
-    required: true,
+  Type: {
+    type: Number,
   },
 });
 
-module.exports = Book = mongoose.model("Light", Light);
+module.exports = Light = mongoose.model("Light", LightSchema);

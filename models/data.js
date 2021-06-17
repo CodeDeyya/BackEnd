@@ -1,33 +1,32 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const DataSchema = new mongoose.Schema({
   DeviceID: {
     type: String,
-    required: true
+    required: true,
   },
   Wtemp: {
     type: Number,
-    
   },
   Atemp: {
     type: Number,
-    
   },
   Rhumidity: {
-    type: Number
+    type: Number,
   },
   WaterLevel: {
     type: Number,
-   
   },
   Status: {
     type: Number,
-    
+  },
+  Type: {
+    type: Number,
   },
   updated_date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = Data = mongoose.model('data', DataSchema);
+module.exports = Data = mongoose.model("data", DataSchema);

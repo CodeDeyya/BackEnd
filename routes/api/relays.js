@@ -38,46 +38,50 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   //update Light Code
-  Data.findById(req.params.id).then((data) => {
-    console.log("Status", data.Status);
-    Status = data.Status;
-    console.log("Time", Date.now());
-    var today = new Date();
-    var time = today.getHours();
-    console.log("Hours", time);
-    // Light.findOne({ DeviceID: "6052e44860ab3d1d88673fb7" })
-    //   .then((data) => {
-    //     console.log("updatedOn", data);
-    //   })
-    //   .catch((error) => {
-    //     console.log("error", error);
-    //   });
-    switch (Status) {
-      case 0:
-        // Germination
-        break;
-      case 1:
-        // EarlyVeg
-        break;
-      case 2:
-        // MidVeg
-        break;
-      case 3:
-        // LateVeg
-        break;
-      case 4:
-        // Transition
-        break;
-      case 5:
-        // Flower
-        break;
-      case 6:
-        // Flush
-        break;
-      default:
-      //default option
-    }
-  });
+  Data.findById(req.params.id)
+    .then((data) => {
+      console.log("Status", data.Status);
+      Status = data.Status;
+      console.log("Time", Date.now());
+      var today = new Date();
+      var time = today.getHours();
+      console.log("Hours", time);
+      // Light.findOne({ DeviceID: "6052e44860ab3d1d88673fb7" })
+      //   .then((data) => {
+      //     console.log("updatedOn", data);
+      //   })
+      //   .catch((error) => {
+      //     console.log("error", error);
+      //   });
+      switch (Status) {
+        case 0:
+        case 1:
+        case 2:
+          // Germination
+          if (time >= 6) {
+            console.log("Light On");
+          } else {
+            console.log("Light Off");
+          }
+          break;
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+          // Transition
+          if (6 <= time && time < 18) {
+            console.log("Light On");
+          } else {
+            console.log("Light Off");
+          }
+          break;
+        default:
+        //default option
+      }
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
 
   //response Code
   Data.findById(req.params.id).then((data) => {
