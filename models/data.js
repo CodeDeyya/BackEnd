@@ -20,9 +20,6 @@ const DataSchema = new mongoose.Schema({
   Status: {
     type: Number,
   },
-  Type: {
-    type: Number,
-  },
   updated_date: {
     type: Date,
     default: Date.now,

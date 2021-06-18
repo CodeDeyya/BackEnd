@@ -43,8 +43,8 @@ router.post("/", (req, res) => {
 // @route GET api/books/:id
 // @description Update book
 // @access Public
-router.put("/:id", (req, res) => {
-  Light.findByIdAndUpdate(req.params.id, req.body)
+router.put("/", (req, res) => {
+  Light.findOneAndUpdate({ DeviceID: req.body.DeviceID }, req.body)
     .then((book) => res.json({ msg: "Updated successfully" }))
     .catch((err) =>
       res.status(400).json({ error: "Unable to update the Database" })

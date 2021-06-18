@@ -40,44 +40,85 @@ router.get("/:id", (req, res) => {
   //update Light Code
   Data.findById(req.params.id)
     .then((data) => {
+      var Type;
       console.log("Status", data.Status);
       Status = data.Status;
       console.log("Time", Date.now());
       var today = new Date();
       var time = today.getHours();
       console.log("Hours", time);
-      // Light.findOne({ DeviceID: "6052e44860ab3d1d88673fb7" })
-      //   .then((data) => {
-      //     console.log("updatedOn", data);
-      //   })
-      //   .catch((error) => {
-      //     console.log("error", error);
-      //   });
-      switch (Status) {
-        case 0:
-        case 1:
-        case 2:
-          // Germination
-          if (time >= 6) {
-            console.log("Light On");
-          } else {
-            console.log("Light Off");
+      Light.findOne({ DeviceID: req.params.id })
+        .then((data) => {
+          console.log("Type", data.Type);
+          console.log("Device", req.params.id);
+          Type = data.Type;
+          if (Type === 0) {
+            switch (Status) {
+              case 0:
+              case 1:
+              case 2:
+                // Germination
+                if (time >= 6) {
+                  console.log("Light On Type0");
+                  Relay.findOneAndUpdate({ _id: req.params.id }, { R11: "ON" });
+                } else {
+                  console.log("Light Off Type0");
+                  Relay.findOneAndUpdate(
+                    { DeviceID: req.params.id },
+                    { R11: "OFF" }
+                  );
+                }
+                break;
+              case 3:
+              case 4:
+              case 5:
+              case 6:
+                // Transition
+                if (6 <= time && time < 18) {
+                  console.log("Light On Type0");
+                  Relay.findOneAndUpdate(
+                    { _id: req.params.id },
+                    { R11: "ON" }
+                  ).catch((error) => {
+                    console.log(error);
+                  });
+                } else {
+                  console.log("Light Off Type0");
+                  Relay.findOneAndUpdate(
+                    { DeviceID: req.params.id },
+                    { R11: "OFF" }
+                  ).catch((error) => {
+                    console.log(error);
+                  });
+                }
+                break;
+              default:
+              //default option
+            }
           }
-          break;
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-          // Transition
-          if (6 <= time && time < 18) {
-            console.log("Light On");
-          } else {
-            console.log("Light Off");
+          if (Type === 1) {
+            if (time >= 6) {
+              console.log("Light On Type1");
+              Relay.findOneAndUpdate(
+                { _id: req.params.id },
+                { R11: "ON" }
+              ).catch((error) => {
+                console.log(error);
+              });
+            } else {
+              console.log("Light Off Type1");
+              Relay.findOneAndUpdate(
+                { DeviceID: req.params.id },
+                { R11: "OFF" }
+              ).catch((error) => {
+                console.log(error);
+              });
+            }
           }
-          break;
-        default:
-        //default option
-      }
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
     })
     .catch((error) => {
       console.log("error", error);
