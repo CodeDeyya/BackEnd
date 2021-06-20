@@ -60,10 +60,13 @@ router.get("/:id", (req, res) => {
                 // Germination
                 if (time >= 10) {
                   console.log("Light On Type0");
-                  Relay.findOneAndUpdate({ _id: req.params.id }, { R11: "ON" });
+                  await Relay.findOneAndUpdate(
+                    { _id: req.params.id },
+                    { R11: "ON" }
+                  );
                 } else {
                   console.log("Light Off Type0");
-                  Relay.findOneAndUpdate(
+                  await Relay.findOneAndUpdate(
                     { _id: req.params.id },
                     { R11: "OFF" }
                   );
