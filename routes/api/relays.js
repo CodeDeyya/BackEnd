@@ -58,7 +58,7 @@ router.get("/:id", (req, res) => {
               case 1:
               case 2:
                 // Germination
-                if (time >= 10) {
+                if (time >= 6) {
                   console.log("Light On Type0");
                   await Relay.findOneAndUpdate(
                     { _id: req.params.id },
@@ -79,7 +79,7 @@ router.get("/:id", (req, res) => {
                 // Transition
                 if (6 <= time && time < 18) {
                   console.log("Light On Type0");
-                  Relay.findOneAndUpdate(
+                  await Relay.findOneAndUpdate(
                     { _id: req.params.id },
                     { R11: "ON" }
                   ).catch((error) => {
@@ -87,7 +87,7 @@ router.get("/:id", (req, res) => {
                   });
                 } else {
                   console.log("Light Off Type0");
-                  Relay.findOneAndUpdate(
+                  await Relay.findOneAndUpdate(
                     { _id: req.params.id },
                     { R11: "OFF" }
                   );
@@ -100,7 +100,7 @@ router.get("/:id", (req, res) => {
           if (Type === 1) {
             if (time >= 6) {
               console.log("Light On Type1");
-              Relay.findOneAndUpdate(
+              await Relay.findOneAndUpdate(
                 { _id: req.params.id },
                 { R11: "ON" }
               ).catch((error) => {
@@ -108,7 +108,10 @@ router.get("/:id", (req, res) => {
               });
             } else {
               console.log("Light Off Type1");
-              Relay.findOneAndUpdate({ _id: req.params.id }, { R11: "OFF" });
+              await Relay.findOneAndUpdate(
+                { _id: req.params.id },
+                { R11: "OFF" }
+              );
             }
           }
         })
