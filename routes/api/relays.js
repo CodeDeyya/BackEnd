@@ -64,7 +64,7 @@ router.get("/:id", (req, res) => {
                 } else {
                   console.log("Light Off Type0");
                   Relay.findOneAndUpdate(
-                    { DeviceID: req.params.id },
+                    { _id: req.params.id },
                     { R11: "OFF" }
                   );
                 }
@@ -85,7 +85,7 @@ router.get("/:id", (req, res) => {
                 } else {
                   console.log("Light Off Type0");
                   Relay.findOneAndUpdate(
-                    { DeviceID: req.params.id },
+                    { _id: req.params.id },
                     { R11: "OFF" }
                   ).catch((error) => {
                     console.log(error);
@@ -108,7 +108,7 @@ router.get("/:id", (req, res) => {
             } else {
               console.log("Light Off Type1");
               Relay.findOneAndUpdate(
-                { DeviceID: req.params.id },
+                { _id: req.params.id },
                 { R11: "OFF" }
               ).catch((error) => {
                 console.log(error);
