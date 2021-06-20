@@ -87,9 +87,7 @@ router.get("/:id", (req, res) => {
                   Relay.findOneAndUpdate(
                     { _id: req.params.id },
                     { R11: "OFF" }
-                  ).catch((error) => {
-                    console.log(error);
-                  });
+                  );
                 }
                 break;
               default:
@@ -107,12 +105,7 @@ router.get("/:id", (req, res) => {
               });
             } else {
               console.log("Light Off Type1");
-              Relay.findOneAndUpdate(
-                { _id: req.params.id },
-                { R11: "OFF" }
-              ).catch((error) => {
-                console.log(error);
-              });
+              Relay.findOneAndUpdate({ _id: req.params.id }, { R11: "OFF" });
             }
           }
         })
