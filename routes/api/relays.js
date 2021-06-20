@@ -57,6 +57,7 @@ router.get("/:id", (req, res) => {
               case 0:
               case 1:
               case 2:
+              case 3:
                 // Germination
                 if (time >= 6) {
                   console.log("Light On Type0");
@@ -72,7 +73,6 @@ router.get("/:id", (req, res) => {
                   );
                 }
                 break;
-              case 3:
               case 4:
               case 5:
               case 6:
