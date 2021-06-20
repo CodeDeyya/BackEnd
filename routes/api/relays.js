@@ -58,7 +58,7 @@ router.get("/:id", (req, res) => {
               case 1:
               case 2:
                 // Germination
-                if (time >= 6) {
+                if (time >= 10) {
                   console.log("Light On Type0");
                   Relay.findOneAndUpdate({ _id: req.params.id }, { R11: "ON" });
                 } else {
