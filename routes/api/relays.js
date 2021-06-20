@@ -48,7 +48,7 @@ router.get("/:id", (req, res) => {
       var time = today.getHours();
       console.log("Hours", time);
       Light.findOne({ DeviceID: req.params.id })
-        .then((data) => {
+        .then(async (data) => {
           console.log("Type", data.Type);
           console.log("Device", req.params.id);
           Type = data.Type;
