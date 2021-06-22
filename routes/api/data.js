@@ -123,6 +123,15 @@ router.post("/", (req, res) => {
   });
 });
 
+router.post("/add", (req, res) => {
+  data
+    .create(req.body)
+    .then((book) => res.json({ msg: "data added successfully" }))
+    .catch((err) =>
+      res.status(400).json({ error: "Unable to add this relay" })
+    );
+});
+
 // @route GET api/books/:id
 // @description Update data
 // @access Public
