@@ -7,11 +7,9 @@ const WaterChange = new mongoose.Schema({
   },
   LastChange: {
     type: Date,
-    required: true,
   },
   DateNow: {
     type: Date,
-    required: true,
   },
 });
 
