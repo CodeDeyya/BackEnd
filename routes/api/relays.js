@@ -605,7 +605,7 @@ router.get("/:id", (req, res) => {
 // @access Public
 router.post("/", (req, res) => {
   Relay.create(req.body)
-    .then((book) => res.json({ msg: "Relay added successfully" }))
+    .then((book) => res.json(book))
     .catch((err) =>
       res.status(400).json({ error: "Unable to add this relay" })
     );
