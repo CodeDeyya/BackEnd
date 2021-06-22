@@ -124,7 +124,7 @@ router.get("/:id", (req, res) => {
     });
 
   //response Code
-  Data.findById(req.params.id).then((data) => {
+  Data.findOne({ DeviceID: req.params.id }).then((data) => {
     console.log(data.Status);
     Status = data.Status;
 
@@ -191,7 +191,7 @@ router.get("/:id", (req, res) => {
               });
             } else {
               var message = JSON.parse(`{"Status": 1}`);
-              Data.findByIdAndUpdate(req.params.id, message).then((data) => {
+              findOne({ DeviceID: req.params.id }).then((data) => {
                 Relay.findByIdAndUpdate(req.params.id, message).then((data) => {
                   Relay.findById(req.params.id).then((book) => {
                     res.json(book);
@@ -257,7 +257,7 @@ router.get("/:id", (req, res) => {
               });
             } else {
               var message = JSON.parse(`{"Status": 2}`);
-              Data.findByIdAndUpdate(req.params.id, message).then((data) => {
+              findOne({ DeviceID: req.params.id }).then((data) => {
                 Relay.findByIdAndUpdate(req.params.id, message).then((data) => {
                   Relay.findById(req.params.id).then((book) => {
                     res.json(book);
@@ -323,7 +323,7 @@ router.get("/:id", (req, res) => {
               });
             } else {
               var message = JSON.parse(`{"Status": 3}`);
-              Data.findByIdAndUpdate(req.params.id, message).then((data) => {
+              findOne({ DeviceID: req.params.id }).then((data) => {
                 Relay.findByIdAndUpdate(req.params.id, message).then((data) => {
                   Relay.findById(req.params.id).then((book) => {
                     res.json(book);
@@ -389,7 +389,7 @@ router.get("/:id", (req, res) => {
               });
             } else {
               var message = JSON.parse(`{"Status": 4}`);
-              Data.findByIdAndUpdate(req.params.id, message).then((data) => {
+              findOne({ DeviceID: req.params.id }).then((data) => {
                 Relay.findByIdAndUpdate(req.params.id, message).then((data) => {
                   Relay.findById(req.params.id).then((book) => {
                     res.json(book);
@@ -455,7 +455,7 @@ router.get("/:id", (req, res) => {
               });
             } else {
               var message = JSON.parse(`{"Status": 5}`);
-              Data.findByIdAndUpdate(req.params.id, message).then((data) => {
+              findOne({ DeviceID: req.params.id }).then((data) => {
                 Relay.findByIdAndUpdate(req.params.id, message).then((data) => {
                   Relay.findById(req.params.id).then((book) => {
                     res.json(book);
@@ -521,7 +521,7 @@ router.get("/:id", (req, res) => {
               });
             } else {
               var message = JSON.parse(`{"Status": 6}`);
-              Data.findByIdAndUpdate(req.params.id, message).then((data) => {
+              findOne({ DeviceID: req.params.id }).then((data) => {
                 Relay.findByIdAndUpdate(req.params.id, message).then((data) => {
                   Relay.findById(req.params.id).then((book) => {
                     res.json(book);
@@ -586,7 +586,7 @@ router.get("/:id", (req, res) => {
               });
             } else {
               var message = JSON.parse(`{"Status": 7}`);
-              Data.findByIdAndUpdate(req.params.id, message).then((data) => {
+              findOne({ DeviceID: req.params.id }).then((data) => {
                 Relay.findByIdAndUpdate(req.params.id, message).then((data) => {
                   Relay.findById(req.params.id).then((book) => {
                     res.json(book);
