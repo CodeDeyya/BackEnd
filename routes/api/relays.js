@@ -38,7 +38,7 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   //update Light Code
-  Data.findById(req.params.id)
+  Data.findOne({ DeviceID: req.params.id })
     .then((data) => {
       var Type;
       console.log("Status", data.Status);
