@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const WaterChange = new mongoose.Schema({
   DeviceID: {
     type: String,
-    required: true
+    required: true,
   },
   LastChange: {
     type: Date,
-    required: true
+    required: true,
   },
   DateNow: {
     type: Date,
-    required: true
-  }
+    required: true,
+  },
 });
 
-module.exports = Book = mongoose.model('WaterChange', WaterChange);
+module.exports = Book = mongoose.model("WaterChange", WaterChange);

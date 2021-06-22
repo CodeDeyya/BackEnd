@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 // @access Public
 router.get("/:id", (req, res) => {
   logger
-    .findById(req.params.id)
+    .findOne({ DeviceID: req.params.id })
     .then((book) => res.json(book))
     .catch((err) => res.status(404).json({ nobookfound: "No Book found" }));
 });
