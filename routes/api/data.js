@@ -127,9 +127,7 @@ router.post("/add", (req, res) => {
   data
     .create(req.body)
     .then((book) => res.json({ msg: "data added successfully" }))
-    .catch((err) =>
-      res.status(400).json({ error: "Unable to add this relay" }, err)
-    );
+    .catch((err) => res.json(err));
 });
 
 // @route GET api/books/:id
