@@ -128,7 +128,7 @@ router.post("/add", (req, res) => {
     .create(req.body)
     .then((book) => res.json({ msg: "data added successfully" }))
     .catch((err) =>
-      res.status(400).json({ error: "Unable to add this relay" })
+      res.status(400).json({ error: "Unable to add this relay" }, err)
     );
 });
 
