@@ -128,7 +128,7 @@ router.get("/:id", (req, res) => {
     console.log(data.Status);
     Status = data.Status;
 
-    logger.findById(req.params.id).then((book) => {
+    logger.findOne({ DeviceID: req.params.id }).then((book) => {
       Germination = book.Germination;
       EarlyVeg = book.EarlyVeg;
       MidVeg = book.MidVeg;
